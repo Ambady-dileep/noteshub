@@ -178,7 +178,7 @@
 .btn-primary {
     width: 100%;
     padding: clamp(0.875rem, 3.5vw, 1rem) clamp(1.25rem, 4vw, 1.5rem);
-    min-height: 48px;
+    min-height: 40px;
     margin-top: clamp(0.25rem, 1vw, 0.5rem);
     font-size: var(--font-base);
     font-weight: var(--font-medium);
