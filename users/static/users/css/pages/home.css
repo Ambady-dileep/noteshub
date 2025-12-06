@@ -1,5 +1,5 @@
 /* ===================================
-   NotesHub Homepage - Responsive Styles
+   NotesHub Homepage - Page Specific Styles
    Premium, Clean, Modern Design
    =================================== */
 
@@ -19,130 +19,26 @@
     --section-padding: clamp(3rem, 8vw, 6rem);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: hsl(var(--background));
-    color: hsl(var(--text));
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 /* ===================================
-   NAVIGATION
+   HERO BUTTONS (Page-specific variants)
    =================================== */
 
-.navbar {
-    position: sticky;
-    top: 0;
-    background: hsla(var(--surface), 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid hsl(var(--border));
-    z-index: 1000;
-    animation: slideDown 0.4s ease-out;
-}
-
-.nav-container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 1rem clamp(1rem, 3vw, 1.5rem);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: clamp(1.125rem, 4vw, 1.25rem);
-    font-weight: 600;
-    color: hsl(var(--text));
-}
-
-.nav-logo svg {
-    width: clamp(24px, 6vw, 28px);
-    height: clamp(24px, 6vw, 28px);
-    color: hsl(var(--primary));
-    flex-shrink: 0;
-}
-
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: clamp(0.5rem, 2vw, 1rem);
-    flex-wrap: wrap;
-}
-
-.user-welcome {
-    font-size: clamp(0.875rem, 3.5vw, 0.9375rem);
-    color: hsl(var(--text-muted));
-    display: none;
-}
-
-/* ===================================
-   BUTTONS
-   =================================== */
-
-.btn-primary,
-.btn-secondary,
-.btn-hero-primary,
-.btn-hero-secondary,
-.btn-cta {
+.btn-hero-primary {
     display: inline-block;
-    padding: clamp(0.625rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
-    font-size: clamp(0.875rem, 3.5vw, 0.9375rem);
+    padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(0.9375rem, 4vw, 1.0625rem);
     font-weight: 500;
     font-family: inherit;
     text-decoration: none;
     border-radius: 10px;
+    background: hsl(var(--primary));
+    color: white;
+    box-shadow: 0 4px 16px hsla(var(--primary), 0.25);
     transition: all 0.2s ease;
     cursor: pointer;
     border: none;
     white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
-}
-
-.btn-primary {
-    background: hsl(var(--primary));
-    color: white;
-}
-
-.btn-primary:hover {
-    background: hsl(var(--primary-hover));
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px hsla(var(--primary), 0.3);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: hsl(var(--text));
-    border: 1.5px solid hsl(var(--border));
-}
-
-.btn-secondary:hover {
-    background: hsl(var(--surface));
-    border-color: hsl(var(--primary));
-    color: hsl(var(--primary));
-}
-
-.btn-hero-primary {
-    padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
-    font-size: clamp(0.9375rem, 4vw, 1.0625rem);
-    background: hsl(var(--primary));
-    color: white;
-    box-shadow: 0 4px 16px hsla(var(--primary), 0.25);
 }
 
 .btn-hero-primary:hover {
@@ -151,12 +47,25 @@ body {
     box-shadow: 0 6px 20px hsla(var(--primary), 0.35);
 }
 
+.btn-hero-primary:active {
+    transform: translateY(0);
+}
+
 .btn-hero-secondary {
+    display: inline-block;
     padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
     font-size: clamp(0.9375rem, 4vw, 1.0625rem);
+    font-weight: 500;
+    font-family: inherit;
+    text-decoration: none;
+    border-radius: 10px;
     background: transparent;
     color: hsl(var(--text));
     border: 1.5px solid hsl(var(--border));
+    transition: all 0.2s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-hero-secondary:hover {
@@ -164,17 +73,34 @@ body {
     border-color: hsl(var(--text));
 }
 
+.btn-hero-secondary:active {
+    transform: scale(0.98);
+}
+
 .btn-cta {
+    display: inline-block;
     padding: 1rem 2rem;
     font-size: 1.0625rem;
+    font-weight: 500;
+    font-family: inherit;
+    text-decoration: none;
+    border-radius: 10px;
     background: white;
     color: hsl(var(--primary));
     box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-cta:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px hsla(0, 0%, 0%, 0.15);
+}
+
+.btn-cta:active {
+    transform: translateY(0);
 }
 
 /* ===================================
@@ -442,44 +368,6 @@ body {
 }
 
 /* ===================================
-   FOOTER
-   =================================== */
-
-.footer {
-    padding: clamp(2rem, 5vw, 3rem) 0;
-    background: hsl(var(--surface));
-    border-top: 1px solid hsl(var(--border));
-}
-
-.footer-container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 clamp(1rem, 3vw, 1.5rem);
-    text-align: center;
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: clamp(1rem, 4vw, 1.125rem);
-    font-weight: 600;
-    margin-bottom: clamp(0.75rem, 2vw, 1rem);
-}
-
-.footer-logo svg {
-    width: clamp(20px, 5vw, 24px);
-    height: clamp(20px, 5vw, 24px);
-    color: hsl(var(--primary));
-}
-
-.footer-text {
-    font-size: clamp(0.8125rem, 3.5vw, 0.875rem);
-    color: hsl(var(--text-muted));
-}
-
-/* ===================================
    ANIMATIONS
    =================================== */
 
@@ -487,17 +375,6 @@ body {
     from {
         opacity: 0;
         transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -541,10 +418,6 @@ body {
         justify-content: flex-start;
     }
     
-    .user-welcome {
-        display: block;
-    }
-    
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -559,10 +432,6 @@ body {
 
 /* Mobile (< 768px) */
 @media (max-width: 767px) {
-    .nav-actions {
-        gap: 0.5rem;
-    }
-    
     .hero-visual {
         height: 280px;
     }

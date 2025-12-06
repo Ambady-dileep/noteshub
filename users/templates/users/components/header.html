@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NotesHub - Your Personal Notes Manager{% endblock %}</title>
+    
+    <!-- Component CSS -->
+    <link rel="stylesheet" href="{% static 'users/css/components/header.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/components/footer.css' %}">
+    
+    <!-- Page Specific CSS -->
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'homepage' %}" class="nav-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
+                </svg>
+                <span>NotesHub</span>
+            </a>
+            
+            <div class="nav-actions">
+                {% if user.is_authenticated %}
+                    <span class="user-welcome">Hello, {{ user.username }}</span>
+                    <a href="{% url 'users:logout' %}" class="btn-secondary">Logout</a>
+                {% else %}
+                    <a href="{% url 'users:login' %}" class="btn-secondary">Sign In</a>
+                    <a href="{% url 'users:signup' %}" class="btn-primary">Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    {% block content %}
+    {% endblock %}
