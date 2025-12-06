@@ -1,23 +1,7 @@
 /* ===================================
    NotesHub Homepage - Page Specific Styles
-   Premium, Clean, Modern Design
+   Relies on base style.css
    =================================== */
-
-:root {
-    --primary: 220 90% 56%;
-    --primary-hover: 220 90% 48%;
-    --background: 210 20% 98%;
-    --surface: 0 0% 100%;
-    --text: 220 20% 20%;
-    --text-muted: 220 10% 50%;
-    --border: 220 15% 90%;
-    --accent: 260 80% 60%;
-    --success: 150 60% 40%;
-    
-    /* Responsive spacing */
-    --container-width: min(1200px, 100% - 3rem);
-    --section-padding: clamp(3rem, 8vw, 6rem);
-}
 
 /* ===================================
    HERO BUTTONS (Page-specific variants)
@@ -26,19 +10,18 @@
 .btn-hero-primary {
     display: inline-block;
     padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
-    font-size: clamp(0.9375rem, 4vw, 1.0625rem);
-    font-weight: 500;
+    font-size: var(--font-lg);
+    font-weight: var(--font-medium);
     font-family: inherit;
     text-decoration: none;
     border-radius: 10px;
     background: hsl(var(--primary));
     color: white;
     box-shadow: 0 4px 16px hsla(var(--primary), 0.25);
-    transition: all 0.2s ease;
+    transition: all var(--transition-base);
     cursor: pointer;
     border: none;
     white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-hero-primary:hover {
@@ -54,18 +37,17 @@
 .btn-hero-secondary {
     display: inline-block;
     padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
-    font-size: clamp(0.9375rem, 4vw, 1.0625rem);
-    font-weight: 500;
+    font-size: var(--font-lg);
+    font-weight: var(--font-medium);
     font-family: inherit;
     text-decoration: none;
     border-radius: 10px;
     background: transparent;
     color: hsl(var(--text));
     border: 1.5px solid hsl(var(--border));
-    transition: all 0.2s ease;
+    transition: all var(--transition-base);
     cursor: pointer;
     white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-hero-secondary:hover {
@@ -80,18 +62,17 @@
 .btn-cta {
     display: inline-block;
     padding: 1rem 2rem;
-    font-size: 1.0625rem;
-    font-weight: 500;
+    font-size: var(--font-lg);
+    font-weight: var(--font-medium);
     font-family: inherit;
     text-decoration: none;
     border-radius: 10px;
     background: white;
     color: hsl(var(--primary));
     box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1);
-    transition: all 0.2s ease;
+    transition: all var(--transition-base);
     cursor: pointer;
     border: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-cta:hover {
@@ -127,9 +108,9 @@
 }
 
 .hero-title {
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.1;
+    font-size: var(--font-4xl);
+    font-weight: var(--font-bold);
+    line-height: var(--line-tight);
     letter-spacing: -0.02em;
     margin-bottom: clamp(1rem, 3vw, 1.5rem);
     animation: fadeUp 0.6s ease-out;
@@ -144,9 +125,9 @@
 }
 
 .hero-description {
-    font-size: clamp(1rem, 4vw, 1.25rem);
+    font-size: var(--font-xl);
     color: hsl(var(--text-muted));
-    line-height: 1.6;
+    line-height: var(--line-relaxed);
     margin-bottom: clamp(2rem, 5vw, 2.5rem);
     max-width: 600px;
     margin-left: auto;
@@ -181,13 +162,12 @@
     width: clamp(1rem, 4vw, 1.125rem);
     height: clamp(1rem, 4vw, 1.125rem);
     color: hsl(var(--success));
-    flex-shrink: 0;
 }
 
 .trust-stat span {
-    font-size: clamp(0.8125rem, 3.5vw, 0.875rem);
+    font-size: var(--font-sm);
     color: hsl(var(--text-muted));
-    font-weight: 500;
+    font-weight: var(--font-medium);
 }
 
 /* Hero Visual */
@@ -200,7 +180,7 @@
 .visual-card {
     position: absolute;
     background: hsl(var(--surface));
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     padding: 1.5rem;
     box-shadow: 
         0 4px 12px hsla(220, 20%, 20%, 0.08),
@@ -231,7 +211,7 @@
 .card-dot {
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    border-radius: var(--radius-full);
     background: hsl(var(--border));
 }
 
@@ -276,14 +256,14 @@
 }
 
 .section-header h2 {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-    font-weight: 700;
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
     margin-bottom: clamp(0.75rem, 2vw, 1rem);
     letter-spacing: -0.02em;
 }
 
 .section-header p {
-    font-size: clamp(1rem, 4vw, 1.125rem);
+    font-size: var(--font-lg);
     color: hsl(var(--text-muted));
 }
 
@@ -296,14 +276,14 @@
 .feature-card {
     padding: clamp(1.5rem, 4vw, 2rem);
     background: hsl(var(--background));
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     border: 1px solid hsl(var(--border));
-    transition: all 0.3s ease;
+    transition: all var(--transition-slow);
 }
 
 .feature-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px hsla(220, 20%, 20%, 0.08);
+    box-shadow: var(--shadow-lg);
     border-color: hsl(var(--primary));
 }
 
@@ -311,7 +291,7 @@
     width: clamp(48px, 12vw, 56px);
     height: clamp(48px, 12vw, 56px);
     background: hsl(var(--surface));
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -325,16 +305,16 @@
 }
 
 .feature-card h3 {
-    font-size: clamp(1.125rem, 4.5vw, 1.25rem);
-    font-weight: 600;
+    font-size: var(--font-xl);
+    font-weight: var(--font-semibold);
     margin-bottom: clamp(0.5rem, 2vw, 0.75rem);
     letter-spacing: -0.01em;
 }
 
 .feature-card p {
-    font-size: clamp(0.9375rem, 4vw, 1rem);
+    font-size: var(--font-base);
     color: hsl(var(--text-muted));
-    line-height: 1.6;
+    line-height: var(--line-relaxed);
 }
 
 /* ===================================
@@ -354,33 +334,22 @@
 }
 
 .cta h2 {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-    font-weight: 700;
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
     color: white;
     margin-bottom: clamp(0.75rem, 2vw, 1rem);
     letter-spacing: -0.02em;
 }
 
 .cta p {
-    font-size: clamp(1rem, 4vw, 1.125rem);
+    font-size: var(--font-lg);
     color: hsla(0, 0%, 100%, 0.9);
     margin-bottom: clamp(2rem, 5vw, 2.5rem);
 }
 
 /* ===================================
-   ANIMATIONS
+   ANIMATIONS (Page-specific)
    =================================== */
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 @keyframes float {
     0%, 100% {
@@ -467,16 +436,5 @@
     
     .hero-visual {
         display: none;
-    }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
     }
 }

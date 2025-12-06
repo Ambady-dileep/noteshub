@@ -1,38 +1,7 @@
 /* ===================================
    Header Component - Navigation Styles
+   Relies on base style.css
    =================================== */
-
-:root {
-    --primary: 220 90% 56%;
-    --primary-hover: 220 90% 48%;
-    --background: 210 20% 98%;
-    --surface: 0 0% 100%;
-    --text: 220 20% 20%;
-    --text-muted: 220 10% 50%;
-    --border: 220 15% 90%;
-    
-    /* Responsive spacing */
-    --container-width: min(1200px, 100% - 3rem);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: hsl(var(--background));
-    color: hsl(var(--text));
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
 
 /* ===================================
    NAVIGATION
@@ -45,7 +14,7 @@ body {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid hsl(var(--border));
-    z-index: 1000;
+    z-index: var(--z-sticky);
     animation: slideDown 0.4s ease-out;
 }
 
@@ -63,11 +32,11 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: clamp(1.125rem, 4vw, 1.25rem);
-    font-weight: 600;
+    font-size: var(--font-xl);
+    font-weight: var(--font-semibold);
     color: hsl(var(--text));
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    transition: opacity var(--transition-base);
 }
 
 .nav-logo:hover {
@@ -78,7 +47,6 @@ body {
     width: clamp(24px, 6vw, 28px);
     height: clamp(24px, 6vw, 28px);
     color: hsl(var(--primary));
-    flex-shrink: 0;
 }
 
 .nav-actions {
@@ -89,7 +57,7 @@ body {
 }
 
 .user-welcome {
-    font-size: clamp(0.875rem, 3.5vw, 0.9375rem);
+    font-size: var(--font-sm);
     color: hsl(var(--text-muted));
     display: none;
 }
@@ -102,16 +70,15 @@ body {
 .btn-secondary {
     display: inline-block;
     padding: clamp(0.625rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
-    font-size: clamp(0.875rem, 3.5vw, 0.9375rem);
-    font-weight: 500;
+    font-size: var(--font-sm);
+    font-weight: var(--font-medium);
     font-family: inherit;
     text-decoration: none;
     border-radius: 10px;
-    transition: all 0.2s ease;
+    transition: all var(--transition-base);
     cursor: pointer;
     border: none;
     white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-primary {
@@ -146,7 +113,7 @@ body {
 }
 
 /* ===================================
-   ANIMATIONS
+   ANIMATIONS (Component-specific)
    =================================== */
 
 @keyframes slideDown {
@@ -188,16 +155,5 @@ body {
     .btn-secondary {
         padding: 0.625rem 1rem;
         font-size: 0.8125rem;
-    }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
     }
 }
