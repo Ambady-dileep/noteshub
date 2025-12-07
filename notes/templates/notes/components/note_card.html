@@ -1,0 +1,35 @@
+{% load static %}
+<div class="note-card">
+    <div class="note-card-header">
+        <h3 class="note-title">{{ note.title|truncatechars:50 }}</h3>
+    </div>
+    
+    <div class="note-card-body">
+        <p class="note-preview">{{ note.content|truncatechars:150 }}</p>
+    </div>
+    
+    <div class="note-card-footer">
+        <!-- View Button -->
+        <button type="button" 
+                class="note-btn view-btn"
+                onclick="openViewModal('{{ note.title|escapejs }}', '{{ note.content|escapejs }}')">
+            View
+        </button>
+
+        <!-- Edit Button -->
+        <button type="button" 
+                class="note-btn edit-btn"
+                data-edit-url="{% url 'notes:edit_note' note.pk %}"
+                data-title="{{ note.title|escapejs }}"
+                data-content="{{ note.content|escapejs }}">
+            Edit
+        </button>
+
+        <!-- Delete Button -->
+        <button type="button" 
+                class="note-btn delete-btn"
+                data-delete-url="{% url 'notes:delete_note' note.pk %}">
+            Delete
+        </button>
+    </div>
+</div>
