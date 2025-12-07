@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %}
+{% extends "users/base.html" %}
 {% load static %}
 
 {% block title %}NotesHub - Your Personal Notes Manager{% endblock %}
@@ -22,7 +22,7 @@
             </p>
             <div class="hero-actions">
                 {% if user.is_authenticated %}
-                    <a href="#" class="btn-hero-primary">Go to My Notes</a>
+                    <a href="{% url 'notes:notes_list' %}" class="btn-cta">Go to My Notes</a>
                 {% else %}
                     <a href="{% url 'users:signup' %}" class="btn-hero-primary">Start Free Today</a>
                     <a href="#features" class="btn-hero-secondary">Learn More</a>
@@ -141,7 +141,7 @@
         <h2>Ready to Get Started?</h2>
         <p>Join thousands of users organizing their thoughts with NotesHub</p>
         {% if user.is_authenticated %}
-            <a href="#" class="btn-cta">Go to My Notes</a>
+            <a href="{% url 'notes:notes_list' %}" class="btn-cta">Go to My Notes</a>
         {% else %}
             <a href="{% url 'users:signup' %}" class="btn-cta">Create Free Account</a>
         {% endif %}

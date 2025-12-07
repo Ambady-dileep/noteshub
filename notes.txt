@@ -1,0 +1,14 @@
+notes/
+├─ static/notes/
+│  ├─ css/
+│  │  └─ notes.css
+│  └─ js/
+│     └─ notes.js
+├─ templates/notes/
+│  ├─ base.html     ✅ (contains sidebar + layout)
+│  ├─ components/
+│  │  └─ note_card.html
+│  └─ pages/
+│     ├─ notes_list.html
+│     ├─ note_form.html
+│     └─ note_detail.html

@@ -1,0 +1,12 @@
+<div id="noteFormModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeNoteFormModal()">&times;</span>
+        <h3 id="modalHeading">Add/Edit Note</h3>
+
+        <form id="noteForm" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-btn" id="modalSubmitBtn">Save</button>
+        </form>
+    </div>
+</div>

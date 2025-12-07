@@ -18,8 +18,7 @@ def signup_view(request):
     else:
         form = SignupForm()
 
-    return render(request, "users/signup.html",{"form":form})
-
+    return render(request, "users/pages/signup.html",{"form":form})
 
 def login_view(request):
     next_url = request.GET.get("next")  # This gets the page user came from
@@ -47,12 +46,13 @@ def login_view(request):
     else:
         form = LoginForm()
 
-    return render(request, "users/login.html", {"form": form})
+    return render(request, "users/pages/login.html", {"form": form})
 
 
 @login_required(login_url='users:login')
 def homepage(request):
-    return render(request, "users/homepage.html")
+    return render(request, "users/pages/homepage.html")
+
 
 def logout_view(request):
     logout(request)

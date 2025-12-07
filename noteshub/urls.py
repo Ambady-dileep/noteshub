@@ -23,4 +23,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('',user_views.homepage, name='homepage'),
     path("users/",include('users.urls', namespace='users')),
+    path("notes/",include('notes.urls', namespace='notes')),
 ]

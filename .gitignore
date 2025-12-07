@@ -10,15 +10,13 @@ db.sqlite3
 staticfiles/
 media/
 *.log
+.notes.txt
 
 # Environment
 .env
 
 # VSCode
 .vscode/
-
-# PyCharm
-.idea/
 
 # Virtual envs
 venv/

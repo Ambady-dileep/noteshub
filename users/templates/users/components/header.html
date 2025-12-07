@@ -1,5 +1,3 @@
-{% load static %}
-
 <!-- Navigation -->
 <nav class="navbar">
     <div class="nav-container">
@@ -17,8 +15,7 @@
             {% if user.is_authenticated %}
                 <!-- Navigation Links -->
                 <a href="{% url 'homepage' %}" class="nav-link">Dashboard</a>
-                <a href="#" class="nav-link">Create Note</a>
-                <a href="#" class="nav-link">Categories</a>
+                <a href="{% url 'notes:add_note' %}" class="nav-link">Create Note</a>
                 
                 <!-- Profile Dropdown -->
                 <div class="profile-dropdown">

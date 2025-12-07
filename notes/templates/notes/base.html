@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <html charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NotesHub{% endblock %}</title>
+
+    <!-- Notes App CSS -->
+    <link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
+
+    {% block extra_css %}{% endblock %}
+    
+</head>
+<a>
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+            <div class="flash-message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">NotesHub</h2>
+        <nav class="nav-links">
+            <a href="{% url 'homepage' %}">Home</a> <!-- Added Home button -->
+            <a href="{% url 'notes:notes_list' %}">My Notes</a>
+            <a href="{% url 'notes:add_note' %}">Add Note</a>
+            <a href="{% url 'users:logout' %}">Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "notes/components/delete_modal.html" %}
+
+    <!-- Notes App JS -->
+    <script src="{% static 'notes/js/notes.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</a>
+</meta>
