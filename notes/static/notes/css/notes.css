@@ -402,11 +402,11 @@ body {
     border-radius: 12px;
     border: none;
     background: transparent;
-    color: rgb(255, 255, 255);
-    font-size: 14px;
+    color: rgb(245, 241, 23);
+    font-size: 20px;
     margin-left: auto;
-    font-weight: 500;
-    flex-direction: row;
+    font-weight: 300;
+    flex-direction: column;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;

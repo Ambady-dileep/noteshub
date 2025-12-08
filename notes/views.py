@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -6,7 +9,13 @@ from .forms import NoteForm
 from django.db.models import Q
 from django.contrib import messages
 from .models import Note
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from openai import OpenAI
 # Create your views here.
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @login_required
 def add_note(request):
@@ -72,3 +81,35 @@ def notes_list(request):
     }
     return render(request, "notes/pages/notes_list.html", context)
 
+@login_required
+@csrf_exempt
+def chatbot(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid request"}, status=405)
+
+    try:
+        data = json.loads(request.body)
+        user_message = data.get("message", "").strip()
+
+        if not user_message:
+            return JsonResponse({"reply": "Please type something to get started! 💭"})
+
+        # Enhanced system prompt for NotesHub context
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system", 
+                    "content": "You are NotesHub AI Assistant, a helpful and friendly AI that assists users with their note-taking needs. You can help with organizing notes, suggesting titles, summarizing content, and providing productivity tips. Be concise, helpful, and conversational."
+                },
+                {"role": "user", "content": user_message}
+            ],
+            temperature=0.7,
+            max_tokens=500
+        )
+
+        reply = response.choices[0].message.content
+        return JsonResponse({"reply": reply})
+
+    except Exception as e:
+        return JsonResponse({"error": f"An error occurred: {str(e)}"}, status=500)

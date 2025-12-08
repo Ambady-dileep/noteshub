@@ -8,6 +8,8 @@
 
     <!-- Notes App CSS -->
     <link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
+    <!-- Chatbot CSS -->
+    <link rel="stylesheet" href="{% static 'notes/css/chatbot.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -24,7 +26,6 @@
 
     <!-- Modern Top Navbar -->
     <nav class="top-navbar">
-
         <!-- Left: Logo / Icon -->
         <div class="navbar-icon">
             <a href="{% url 'homepage' %}" class="logo">
@@ -38,7 +39,6 @@
         <div class="navbar-links" id="navLinks">
             <a href="{% url 'homepage' %}" {% if request.resolver_match.url_name == 'homepage' %}class="active"{% endif %}>Home</a>
             <a href="{% url 'notes:notes_list' %}" {% if request.resolver_match.url_name == 'notes_list' %}class="active"{% endif %}>Notes</a>
-            <a href="#" {% if request.resolver_match.url_name == 'ai' %}class="active"{% endif %}>AI</a>
             <a href="#" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>About</a>
             <a href="#" {% if request.resolver_match.url_name == 'settings' %}class="active"{% endif %}>Settings</a>
         </div>
@@ -59,15 +59,39 @@
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Floating AI Assistant Button -->
+    <div class="ai-assistant-fab">
+        <button id="openChatbot" class="fab-button" aria-label="Open AI Assistant">
+            <span class="fab-icon">🤖</span>
+        </button>
+        <div class="fab-tooltip">AI Assistant</div>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div id="chatbotModal" class="chatbot-modal">
+        <div class="chatbot-box">
+            <div class="chatbot-header">
+                <span>NotesHub AI</span>
+                <button id="closeChatbot">&times;</button>
+            </div>
+
+            <div id="chatMessages" class="chatbot-messages"></div>
+
+            <div class="chatbot-input">
+                <input id="chatInput" type="text" placeholder="Ask me anything..." />
+                <button id="sendChat">Send</button>
+            </div>
+        </div>
+    </div>
+
     {% include "notes/components/delete_modal.html" %}
 
     <!-- Notes App JS -->
     <script src="{% static 'notes/js/notes.js' %}"></script>
     
-    <!-- Mobile Menu Toggle Script -->
-    <script>
-        
-    </script>
+    <!-- Chatbot JS -->
+    <script src="{% static 'notes/js/chatbot.js' %}"></script>
+    
     {% block extra_js %}{% endblock %}
 </body>
 </html>
