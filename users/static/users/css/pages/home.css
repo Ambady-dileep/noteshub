@@ -67,8 +67,8 @@
     font-family: inherit;
     text-decoration: none;
     border-radius: 10px;
-    background: white;
-    color: hsl(var(--primary));
+    background: rgb(255, 255, 255);
+    color: black;
     box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1);
     transition: all var(--transition-base);
     cursor: pointer;
@@ -223,7 +223,7 @@
 
 .card-line {
     height: 8px;
-    background: hsl(var(--background));
+    background: white;
     border-radius: 4px;
 }
 
@@ -323,7 +323,7 @@
 
 .cta {
     padding: var(--section-padding) 0;
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    background: black;
 }
 
 .cta-container {

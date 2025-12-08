@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <html charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}NotesHub{% endblock %}</title>
 
     <!-- Notes App CSS -->
     <link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
-
     {% block extra_css %}{% endblock %}
-    
 </head>
-<a>
+<body>
+
     {% if messages %}
     <div class="flash-messages">
         {% for message in messages %}
@@ -23,16 +22,37 @@
     </div>
     {% endif %}
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <h2 class="logo">NotesHub</h2>
-        <nav class="nav-links">
-            <a href="{% url 'homepage' %}">Home</a> <!-- Added Home button -->
-            <a href="{% url 'notes:notes_list' %}">My Notes</a>
-            <a href="{% url 'notes:add_note' %}">Add Note</a>
-            <a href="{% url 'users:logout' %}">Logout</a>
-        </nav>
-    </aside>
+    <!-- Modern Top Navbar -->
+    <nav class="top-navbar">
+
+        <!-- Left: Logo / Icon -->
+        <div class="navbar-icon">
+            <a href="{% url 'homepage' %}" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="logo-icon">
+                    <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Center: Navigation Links -->
+        <div class="navbar-links" id="navLinks">
+            <a href="{% url 'homepage' %}" {% if request.resolver_match.url_name == 'homepage' %}class="active"{% endif %}>Home</a>
+            <a href="{% url 'notes:notes_list' %}" {% if request.resolver_match.url_name == 'notes_list' %}class="active"{% endif %}>Notes</a>
+            <a href="#" {% if request.resolver_match.url_name == 'ai' %}class="active"{% endif %}>AI</a>
+            <a href="#" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>About</a>
+            <a href="#" {% if request.resolver_match.url_name == 'settings' %}class="active"{% endif %}>Settings</a>
+        </div>
+
+        <!-- Right: Logout Button -->
+        <div class="navbar-menu">
+            <button class="menu-btn" id="menuBtn">
+                <svg class="logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                    <line x1="12" y1="2" x2="12" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
 
     <!-- Main Content Area -->
     <main class="main-content">
@@ -43,6 +63,11 @@
 
     <!-- Notes App JS -->
     <script src="{% static 'notes/js/notes.js' %}"></script>
+    
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        
+    </script>
     {% block extra_js %}{% endblock %}
-</a>
-</meta>
+</body>
+</html>

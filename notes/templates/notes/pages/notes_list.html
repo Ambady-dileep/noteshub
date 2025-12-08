@@ -5,24 +5,69 @@
 {% block content %}
 <div class="notes-wrapper">
 
-    <!-- Header -->
-    <div class="notes-header">
-        <h2>My Notes</h2>
+    <!-- Search Bar (Below Navbar) -->
+    <div class="search-container">
+        <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search notes..." 
+                value="{{ query }}"
+                aria-label="Search notes"
+            >
+            <div class="search-loader" id="searchLoader"></div>
+        </div>
 
-        <form method="GET" class="search-form">
-            <input type="text" name="q" placeholder="Search notes..." value="{{ query }}" aria-label="Search notes">
+        <div class="controls-group">
+            <!-- Sort Dropdown -->
+            <div class="sort-dropdown">
+                <button class="sort-btn" id="sortBtn">
+                    <svg class="sort-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M7 12h10M11 18h2"></path>
+                    </svg>
+                    <span id="sortLabel">Newest</span>
+                    <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                </button>
+                <div class="sort-menu" id="sortMenu">
+                    <button class="sort-option" data-value="-created_at" {% if sort_by == '-created_at' %}data-active="true"{% endif %}>
+                        <span>Newest First</span>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </button>
+                    <button class="sort-option" data-value="created_at" {% if sort_by == 'created_at' %}data-active="true"{% endif %}>
+                        <span>Oldest First</span>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </button>
+                    <button class="sort-option" data-value="title" {% if sort_by == 'title' %}data-active="true"{% endif %}>
+                        <span>Title (A-Z)</span>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </button>
+                    <button class="sort-option" data-value="-title" {% if sort_by == '-title' %}data-active="true"{% endif %}>
+                        <span>Title (Z-A)</span>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
-            <select name="sort" onchange="this.form.submit()" aria-label="Sort notes">
-                <option value="-created_at" {% if sort_by == '-created_at' %}selected{% endif %}>Newest First</option>
-                <option value="created_at" {% if sort_by == 'created_at' %}selected{% endif %}>Oldest First</option>
-                <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title (A-Z)</option>
-                <option value="-title" {% if sort_by == '-title' %}selected{% endif %}>Title (Z-A)</option>
-            </select>
-
-            <button type="submit">Search</button>
-        </form>
-
-        <button class="add-note-btn" id="openAddNoteBtn">+ Add Note</button>
+            <!-- Add Note Button -->
+            <button class="add-note-btn" id="openAddNoteBtn">
+                <img width="32" height="32" src="https://img.icons8.com/fluency/48/add--v1.png" alt="Add Icon"/>
+                <span>New Note</span>
+            </button>
+        </div>
     </div>
 
     <!-- Notes List -->
@@ -33,7 +78,11 @@
             {% endfor %}
         {% else %}
             <div class="empty-state">
-                <p>📝 No notes yet. Create your first note to get started!</p>
+                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <p>No notes yet</p>
+                <span>Create your first note to get started</span>
             </div>
         {% endif %}
     </div>
@@ -42,11 +91,21 @@
     {% if page_obj.paginator.num_pages > 1 %}
     <div class="pagination">
         {% if page_obj.has_previous %}
-            <a href="?q={{ query }}&sort={{ sort_by }}&page={{ page_obj.previous_page_number }}">← Previous</a>
+            <a href="?q={{ query }}&sort={{ sort_by }}&page={{ page_obj.previous_page_number }}" class="page-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Previous
+            </a>
         {% endif %}
-        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        <span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
         {% if page_obj.has_next %}
-            <a href="?q={{ query }}&sort={{ sort_by }}&page={{ page_obj.next_page_number }}">Next →</a>
+            <a href="?q={{ query }}&sort={{ sort_by }}&page={{ page_obj.next_page_number }}" class="page-btn">
+                Next
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m9 18 6-6-6-6"></path>
+                </svg>
+            </a>
         {% endif %}
     </div>
     {% endif %}
@@ -95,7 +154,7 @@
                 <label for="id_content">Content</label>
                 <textarea name="content" id="id_content" required></textarea>
             </div>
-            <button type="submit" class="submit-btn" id="modalSubmitBtn">Save</button>
+            <button type="submit" class="submit-btn" id="modalSubmitBtn">Save Note</button>
         </form>
     </div>
 </div>

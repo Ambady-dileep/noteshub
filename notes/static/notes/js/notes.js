@@ -13,8 +13,106 @@ const noteFormModal = document.getElementById("noteFormModal");
 const closeNoteFormModalBtn = document.getElementById("closeNoteFormModalBtn");
 const noteForm = document.getElementById("noteForm");
 const modalHeading = document.getElementById("modalHeading");
-const modalSubmitBtn = document.getElementById("modalSubmitBtn");
 const openAddNoteBtn = document.getElementById("openAddNoteBtn");
+
+// ================== Search with Debouncing ==================
+const searchInput = document.getElementById("searchInput");
+const searchLoader = document.getElementById("searchLoader");
+let searchTimeout;
+
+if (searchInput) {
+    searchInput.addEventListener("input", function() {
+        clearTimeout(searchTimeout);
+        
+        // Show loader
+        searchLoader.classList.add("active");
+        
+        searchTimeout = setTimeout(() => {
+            performSearch();
+        }, 500); // 500ms debounce delay
+    });
+
+    // Allow Enter key to search immediately
+    searchInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            clearTimeout(searchTimeout);
+            performSearch();
+        }
+    });
+}
+
+function performSearch() {
+    const query = searchInput.value.trim();
+    const url = new URL(window.location.href);
+    
+    if (query) {
+        url.searchParams.set("q", query);
+    } else {
+        url.searchParams.delete("q");
+    }
+    
+    // Keep current sort parameter
+    const currentSort = url.searchParams.get("sort");
+    if (currentSort) {
+        url.searchParams.set("sort", currentSort);
+    }
+    
+    // Reset to page 1 on new search
+    url.searchParams.delete("page");
+    
+    window.location.href = url.toString();
+}
+
+// ================== Sort Dropdown ==================
+const sortBtn = document.getElementById("sortBtn");
+const sortMenu = document.getElementById("sortMenu");
+const sortDropdown = document.querySelector(".sort-dropdown");
+const sortOptions = document.querySelectorAll(".sort-option");
+const sortLabel = document.getElementById("sortLabel");
+
+// Toggle dropdown
+if (sortBtn) {
+    sortBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sortDropdown.classList.toggle("active");
+    });
+}
+
+// Close dropdown when clicking outside
+document.addEventListener("click", () => {
+    if (sortDropdown) {
+        sortDropdown.classList.remove("active");
+    }
+});
+
+// Handle sort option selection
+sortOptions.forEach(option => {
+    option.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const sortValue = option.dataset.value;
+        
+        // Update URL with new sort value
+        const url = new URL(window.location.href);
+        url.searchParams.set("sort", sortValue);
+        
+        // Reset to page 1 on new sort
+        url.searchParams.delete("page");
+        
+        window.location.href = url.toString();
+    });
+});
+
+// Set initial sort label based on current sort
+function updateSortLabel() {
+    const activeOption = document.querySelector('.sort-option[data-active="true"]');
+    if (activeOption && sortLabel) {
+        const labelText = activeOption.querySelector('span').textContent;
+        sortLabel.textContent = labelText.replace(' First', '').replace(' (A-Z)', '').replace(' (Z-A)', '');
+    }
+}
+
+updateSortLabel();
 
 // ================== Delete Modal ==================
 function openDeleteModal(url) {
@@ -38,6 +136,8 @@ if (cancelDeleteBtn) cancelDeleteBtn.addEventListener("click", closeDeleteModal)
 // Close modal on outside click
 window.addEventListener("click", e => {
     if (e.target === deleteModal) closeDeleteModal();
+    if (e.target === viewModal) closeViewModal();
+    if (e.target === noteFormModal) closeNoteFormModal();
 });
 
 // ================== View Modal ==================
@@ -52,9 +152,6 @@ function closeViewModal() {
 }
 
 if (closeViewModalBtn) closeViewModalBtn.addEventListener("click", closeViewModal);
-window.addEventListener("click", e => {
-    if (e.target === viewModal) closeViewModal();
-});
 
 // ================== Add/Edit Note Modal ==================
 document.querySelectorAll(".note-btn.edit-btn").forEach(btn => {
@@ -66,8 +163,7 @@ document.querySelectorAll(".note-btn.edit-btn").forEach(btn => {
     });
 });
 
-// Update openNoteFormModal to prefill inputs
-function openNoteFormModal(url, heading="Add Note", titleValue="", contentValue="") {
+function openNoteFormModal(url, heading = "Add Note", titleValue = "", contentValue = "") {
     modalHeading.innerText = heading;
     noteForm.action = url;
     noteFormModal.style.display = "flex";
@@ -91,18 +187,8 @@ if (openAddNoteBtn) {
     });
 }
 
-// Close modal on outside click
-window.addEventListener("click", e => {
-    if (e.target === noteFormModal) closeNoteFormModal();
+// ================== Stagger Animation for Note Cards ==================
+const noteCards = document.querySelectorAll('.note-card');
+noteCards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.05}s`;
 });
-
-// ================== Sorting ==================
-function sortNotes() {
-    const sortSelect = document.querySelector("select[name='sort']");
-    if (!sortSelect) return;
-
-    const sortValue = sortSelect.value;
-    const url = new URL(window.location.href);
-    url.searchParams.set("sort", sortValue);
-    window.location.href = url;
-}

@@ -1,4 +1,4 @@
-/* ===========================   Global Styles In Notes App from notes.css   =========================== */
+/* ===========================   Global Styles   =========================== */
 * {
     margin: 0;
     padding: 0;
@@ -11,166 +11,430 @@ html {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-    background: linear-gradient(135deg, #FAFBFC 0%, #F5F7FA 100%);
-    color: #1A202C;
+    background: rgb(0, 0, 0);
+    color: #ffffff;
     line-height: 1.6;
     font-weight: 400;
+    padding-top: 80px; /* Space for fixed navbar */
 }
 
-/* ===========================   Sidebar   =========================== */
-.sidebar {
-    width: 280px;
-    height: 100vh;
-    background-color: #0F172A;
-    color: white;
+/* ====================== Navbar ====================== */
+.top-navbar {
     position: fixed;
-    left: 0;
-    top: 0;
-    padding: 40px 24px;
-    box-shadow: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-    z-index: 100;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    height: 55px;
+    background: linear-gradient(135deg, #121212 0% );
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+}
+
+/* Icon / Logo */
+.navbar-icon {
+    display: flex;
+    align-items: center;
 }
 
 .logo {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 50px;
-    letter-spacing: 0.5px;
-    color: #FFFFFF;
-}
-
-.nav-links {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
 }
 
-.nav-links a {
-    display: block;
-    color: #94A3B8;
+.logo-icon {
+    width: 27px;
+    height: 27px;
+    color: #ffffff;
+}
+
+/* Links */
+.navbar-links {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar-links a {
+    color: #ffffff;
     text-decoration: none;
-    padding: 11px 14px;
+    padding: 8px 14px;
     border-radius: 8px;
     font-size: 14px;
-    font-weight: 500;
-    transition: all 0.25s ease;
+    transition: 0.25s ease;
+}
+
+.navbar-links a:hover {
+    background: rgba(16, 16, 16, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Navbar Menu Button */
+.navbar-menu {
     position: relative;
 }
 
-.nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #E2E8F0;
+.menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.logout-icon {
+    width: 17px;
+    height: 17px;
+    color: #ff0000;
+    transition: transform 0.25s ease;
+}
+
+.menu-btn:hover .logout-icon {
+    transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .main-content {
+        padding: 24px 20px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        min-width: 100%;
+    }
+
+    .controls-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .add-note-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .notes-list {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .flash-messages {
+        top: 80px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+    }
+}
+
+.mobile-only {
+    display: none;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 /* ===========================   Main Content   =========================== */
 .main-content {
-    margin-left: 280px;
-    padding: 50px 48px;
+    padding: 30px 48px;
     min-height: 100vh;
 }
-
-/* ===========================   Notes Wrapper & Header   =========================== */
+/* ===========================   Notes Wrapper   =========================== */
 .notes-wrapper {
     max-width: 1600px;
     margin: 0 auto;
 }
 
-.notes-header {
+/* ===========================   Search Container   =========================== */
+.search-container {
     display: flex;
-    justify-content: space-between;
+    max-width: 500px;
+    width: 100%;
+    gap: 12px;
     align-items: center;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-    gap: 24px;
+    margin-bottom: 32px;
+    flex-direction: row;   
+    animation: fadeInDown 0.4s ease;
+    flex-wrap: nowrap;
 }
 
-.notes-header h2 {
-    font-size: 36px;
-    font-weight: 700;
-    color: #0F172A;
-    letter-spacing: -0.5px;
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.add-note-btn {
-    background-color: #0F172A;
-    color: #FFFFFF;
-    padding: 11px 28px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.25s ease;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
-    border: none;
-    cursor: pointer;
+.search-box {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.add-note-btn:hover {
-    background-color: #1E293B;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
-    transform: translateY(-1px);
+.search-icon {
+    position: absolute;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+    color: rgba(240, 236, 236, 0.5);
+    transition: color 0.3s ease;
+    z-index: 2;
 }
 
-/* ===========================   Search & Sort Form   =========================== */
-.search-form {
+.search-box:focus-within .search-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#searchInput {
+    width: 100%;
+    padding: 14px 45px 14px 48px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+#searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.search-loader {
+    position: absolute;
+    right: 16px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-loader.active {
+    opacity: 1;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.controls-group {
     display: flex;
     gap: 12px;
     align-items: center;
-    flex-wrap: wrap;
 }
 
-.search-form input[type="text"] {
-    flex: 1;
-    min-width: 220px;
-    padding: 11px 16px;
-    border-radius: 8px;
-    border: 1px solid #E2E8F0;
-    font-size: 14px;
-    transition: all 0.25s ease;
-    background-color: #FFFFFF;
+/* ===========================   Sort Dropdown   =========================== */
+.sort-dropdown {
+    position: relative;
 }
 
-.search-form input[type="text"]:focus {
-    outline: none;
-    border-color: #0F172A;
-    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
-}
-
-.search-form select {
-    padding: 11px 16px;
-    border-radius: 8px;
-    border: 1px solid #E2E8F0;
-    font-size: 14px;
-    background-color: white;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    color: #1A202C;
-}
-
-.search-form select:focus {
-    outline: none;
-    border-color: #0F172A;
-    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
-}
-
-.search-form button {
-    padding: 11px 24px;
-    border-radius: 8px;
-    border: none;
-    background-color: #0F172A;
+.sort-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     color: white;
-    font-weight: 600;
     font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.25s ease;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
-.search-form button:hover {
-    background-color: #1E293B;
+.sort-btn:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.12);
     transform: translateY(-1px);
-    box-shadow: 0 8px 16px rgba(15, 23, 42, 0.15);
+}
+
+.sort-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.chevron-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.sort-dropdown.active .chevron-icon {
+    transform: rotate(180deg);
+}
+
+.sort-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+}
+
+.sort-dropdown.active .sort-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.sort-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border: none;
+    background: none;
+    color: #1E293B;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.sort-option:hover {
+    background: #F1F5F9;
+}
+
+.check-icon {
+    width: 18px;
+    height: 18px;
+    color: #0F66FF;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sort-option[data-active="true"] {
+    background: #EFF6FF;
+    color: #0F66FF;
+}
+
+.sort-option[data-active="true"] .check-icon {
+    opacity: 1;
+}
+
+/* ===========================   Add Note Button   =========================== */
+.add-note-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6.6px 13px;
+    border-radius: 12px;
+    border: none;
+    background: transparent;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 500;
+    flex-direction: row;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.add-note-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.add-note-btn:hover::before {
+    left: 100%;
+}
+
+.add-note-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+}
+
+.add-note-btn:active {
+    transform: translateY(0);
 }
 
 /* ===========================   Notes List (Grid)   =========================== */
@@ -179,14 +443,24 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
     margin-bottom: 50px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* ===========================   Note Card   =========================== */
 .note-card {
-    background-color: #FFFFFF;
+    background-color: #000000;
     border-radius: 12px;
     padding: 28px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
@@ -194,6 +468,18 @@ body {
     border: 1px solid #F0F4F8;
     position: relative;
     overflow: hidden;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .note-card::before {
@@ -202,14 +488,14 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #0F172A, #64748B);
+    height: 3.5px;
+    background: linear-gradient(90deg, #ffffff, #e5e6ea);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .note-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 32px rgba(255, 255, 255, 0.08);
     transform: translateY(-4px);
     border-color: #E0E7FF;
 }
@@ -226,7 +512,7 @@ body {
 .note-title {
     font-size: 19px;
     font-weight: 700;
-    color: #0F172A;
+    color: #ffe819;
     word-wrap: break-word;
     letter-spacing: -0.3px;
 }
@@ -236,7 +522,7 @@ body {
 }
 
 .note-preview {
-    color: #64748B;
+    color: #ffffff;
     font-size: 14px;
     line-height: 1.7;
     word-wrap: break-word;
@@ -263,7 +549,7 @@ body {
     text-align: center;
     display: inline-block;
     background-color: #F8FAFC;
-    color: #475569;
+    color: #fefefe;
 }
 
 .note-btn:hover {
@@ -305,13 +591,33 @@ body {
 
 /* ===========================   Empty State   =========================== */
 .empty-state {
+    grid-column: 1 / -1;
     text-align: center;
     padding: 80px 20px;
-    color: #94A3B8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 0.6s ease;
+}
+
+.empty-icon {
+    width: 64px;
+    height: 64px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 8px;
 }
 
 .empty-state p {
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+}
+
+.empty-state span {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* ===========================   Pagination   =========================== */
@@ -319,31 +625,40 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     margin-top: 50px;
 }
 
-.pagination a {
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 1px solid #E2E8F0;
+.page-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
     text-decoration: none;
-    color: #0F172A;
     font-weight: 600;
     font-size: 14px;
-    transition: all 0.2s ease;
-    background-color: white;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
-.pagination a:hover {
-    background-color: #0F172A;
-    color: white;
-    border-color: #0F172A;
+.page-btn svg {
+    width: 16px;
+    height: 16px;
 }
 
-.pagination span {
+.page-btn:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.page-info {
     padding: 10px 16px;
-    color: #94A3B8;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 14px;
     font-weight: 500;
 }
@@ -530,7 +845,7 @@ body {
 /* ===========================   Flash Messages   =========================== */
 .flash-messages {
     position: fixed;
-    top: 32px;
+    top: 90px;  /* Changed from 32px */
     right: 32px;
     z-index: 2000;
     max-width: 420px;
@@ -586,24 +901,68 @@ body {
     .notes-list {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
-    
+
     .main-content {
         padding: 40px 32px;
     }
 }
 
 @media (max-width: 768px) {
-    .sidebar {
+    .top-navbar {
+        padding: 0 20px;
+        height: 60px;
+    }
+
+    body {
+        padding-top: 60px;
+    }
+
+    .navbar-left {
+        gap: 0;
+        flex: 1;
+    }
+
+    .navbar-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #ffdd00 0%, #ffc107 100%);
+        flex-direction: column;
+        padding: 20px;
+        gap: 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-links a {
         width: 100%;
-        height: auto;
-        position: relative;
-        padding: 24px 20px;
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: center;
+        padding: 15px;
+        margin-bottom: 8px;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .navbar-right {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+        margin-top: 12px;
     }
 
     .main-content {
-        margin-left: 0;
         padding: 32px 20px;
     }
 
@@ -631,7 +990,7 @@ body {
     }
 
     .flash-messages {
-        top: 16px;
+        top: 76px;
         right: 16px;
         left: 16px;
         max-width: none;
@@ -650,5 +1009,27 @@ body {
     .notes-header h2 {
         font-size: 24px;
     }
-    
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        width: 30px;
+        height: 30px;
+    }
+    .controls-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sort-dropdown,
+    .add-note-btn {
+        width: 100%;
+    }
+
+    .sort-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
