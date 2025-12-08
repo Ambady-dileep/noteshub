@@ -198,7 +198,6 @@ body {
 /* ===========================   Search Container   =========================== */
 .search-container {
     display: flex;
-    max-width: 500px;
     width: 100%;
     gap: 12px;
     align-items: center;
@@ -288,6 +287,7 @@ body {
 .controls-group {
     display: flex;
     gap: 12px;
+    width: 100%;
     align-items: center;
 }
 
@@ -404,11 +404,11 @@ body {
     background: transparent;
     color: rgb(255, 255, 255);
     font-size: 14px;
+    margin-left: auto;
     font-weight: 500;
     flex-direction: row;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
 }
